@@ -13,8 +13,8 @@ logEnv(env);
 module.exports = {
 	context: __dirname + '/app',
 	entry: {
-		home: './home',
-		about: './about',
+		home: './home/home',
+		about: './home/about',
 		app: './app'
 	},
 	output: {

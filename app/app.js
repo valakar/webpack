@@ -1,19 +1,27 @@
 'use strict';
 
-document.getElementById('loginButton').onclick = () => {
-	require.ensure(['./login'], require => {
-		let login = require('./login');
+/*let moduleName = location.pathname.slice(1);
 
-		login();
-	}, 'auth');
+let context = require.context('./routes/', true, /\.js$/);
 
-};
+context.keys().forEach(path => {
+	let module = context(path);
+	module();
+});*/
 
-document.getElementById('logoutButton').onclick = () => {
+let handler;
 
-	require.ensure([], require => {
-		let logout = require('./logout');
+try {
+	let context = require.context('./routes/', true,  /^\.\//);
+	handler = context('./' + moduleName);
+} catch (e) {
+	alert("No such path");
+}
 
-		logout();
-	}, 'auth');
-};
+if (handler) {
+	handler(function(route) {
+
+		route();
+
+	});
+}
