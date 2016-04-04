@@ -14,8 +14,7 @@ module.exports = {
 	context: __dirname + '/app',
 	entry: {
 		home: './home',
-		about: './about',
-		welcome: './welcome'
+		about: './about'
 	},
 	output: {
 		path: __dirname + '/build',
@@ -35,7 +34,10 @@ module.exports = {
 		new webpack.DefinePlugin({
 			NODE_ENV: JSON.stringify(NODE_ENV)
 		}),
-		new webpack.NoErrorsPlugin()
+		new webpack.NoErrorsPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common'
+		})
 	],
 
 	module: {
