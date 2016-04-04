@@ -11,12 +11,15 @@ const
 logEnv(env);
 
 module.exports = {
-	context: __dirname + "/app",
-	entry: "./home",
+	context: __dirname + '/app',
+	entry: {
+		home: './home',
+		about: './about'
+	},
 	output: {
-		path: __dirname + "/build",
-		filename: "app.js",
-		library: 'home'
+		path: __dirname + '/build',
+		filename: '[name].js',
+		library: '[name]'
 	},
 
 	watch: NODE_ENV == DEV,
@@ -25,7 +28,7 @@ module.exports = {
 		aggregateTimeout: 100
 	},
 
-	devtool: NODE_ENV == DEV ? "cheap-inline-module-source-map" : null,
+	devtool: NODE_ENV == DEV ? 'cheap-inline-module-source-map' : null,
 
 	plugins: [
 		new webpack.DefinePlugin({
