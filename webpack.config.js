@@ -14,11 +14,13 @@ module.exports = {
 	context: __dirname + '/app',
 	entry: {
 		home: './home',
-		about: './about'
+		about: './about',
+		app: './app'
 	},
 	output: {
 		path: __dirname + '/build',
 		filename: '[name].js',
+		publicPath: '/build/',
 		library: '[name]'
 	},
 
