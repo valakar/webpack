@@ -19,7 +19,8 @@ require('bundle!./routes/' + moduleName)(route => {
 let handler;
 
 try {
-	handler = require('bundle!./routes/' + moduleName);
+	let context = require.context('bundle!./routes/', true, /^\.\//);
+	handler = context('./' + moduleName);
 } catch (e) {
 	alert("No such path");
 }
