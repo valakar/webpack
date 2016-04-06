@@ -11,16 +11,15 @@ const
 logEnv(env);
 
 module.exports = {
-	context: __dirname + '/app',
+	context: __dirname + '\\app',
 	entry: {
-		home: './home/home',
-		about: './home/about',
+		// home: './home/home',
+		// about: './home/about',
 		app: './app'
 	},
 	output: {
 		path: __dirname + '/build',
 		filename: '[name].js',
-		publicPath: '/build/',
 		library: '[name]'
 	},
 
@@ -49,7 +48,7 @@ module.exports = {
 			exclude: /node_modules/,
 			loader: 'babel',
 			query: {
-				plugins: ['transform-runtime'],
+				plugins: ['transform-es2015-modules-commonjs'],
 				presets: ['es2015', 'stage-0']
 			}
 		}],
