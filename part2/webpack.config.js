@@ -9,7 +9,9 @@ const
 	logEnv = require('./env/log');
 
 const 
-	HtmlWebpackPlugin = require('html-webpack-plugin');
+	HtmlWebpackPlugin = require('html-webpack-plugin'),
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	autoprefixer = require('autoprefixer');
 
 logEnv(env);
 
@@ -44,24 +46,33 @@ module.exports = {
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'common'
+		}),
+		new ExtractTextPlugin('styles.css', {
+			allChunks: true
 		})
 	],
 
 	module: {
 
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel',
-			query: {
-				plugins: ['transform-es2015-modules-commonjs'],
-				presets: ['es2015', 'stage-0']
+		loaders: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel',
+				query: {
+					plugins: ['transform-es2015-modules-commonjs'],
+					presets: ['es2015', 'stage-0']
+				}
+			},
+			{
+				test: /\.sass$/,
+				loader: ExtractTextPlugin.extract('css!postcss!sass')
 			}
-		}],
+		],
 
 		resolve: {
 			modulesDirectories: ['node_modules'],
-			extensions: ['', '.js']
+			extensions: ['', '.js', 'sass']
 		},
 
 		resolveLoader: {
@@ -69,7 +80,10 @@ module.exports = {
 			moduleTemplates: ['*-loader', '*'],
 			extensions: ['', '.js']
 		}
+	},
 
+	postcss: () => {
+		return [autoprefixer];
 	}
 };
 

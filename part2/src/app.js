@@ -1,1 +1,1 @@
-alert('a');
+import './styles/index.sass';
